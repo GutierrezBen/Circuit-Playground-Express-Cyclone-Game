@@ -15,6 +15,6 @@ Click the buttons at the right time to score a point. Utilize the switch to make
 
 #### Outputs
 
-1) LEDs: The LEDs are the main output of the game showing the red and blue lights.
+1) NeoPixels: The LEDs are the main output of the game showing the red and blue lights.
 2) Sound: When the player scores a point the board will play a sound the frequency will increase as the player scores more points. When the player fails the speakers say "Fail" ending the game.
 3) Serial Monitor: The serial monitor will print out the player's score as they score more and more points. When the player fails a level "GAME OVER" and the player's final score will be printed to the serial monitor, followed by prompting the player to play again.
