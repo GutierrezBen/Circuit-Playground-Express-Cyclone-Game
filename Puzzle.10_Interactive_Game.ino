@@ -33,30 +33,30 @@ void setup() {
 }
 
 void loop() {
-  ranLED = random(10);
+  ranLED = random(10);  //Selects the random LED
 
   CircuitPlayground.setPixelColor(ranLED, 255, 0, 0);
 
   delay(250);
 
-  while (true) {
-    for (int i = 0; i < 10; i++) {
+  while (true) {  //While loop to repeat the for loop
+    for (int i = 0; i < 10; i++) {  //For loop for the circling LED
       currentLED = i;
       CircuitPlayground.setPixelColor(ranLED, 255, 0, 0);
       CircuitPlayground.setPixelColor(i, 0, 0, 255);
       delay(delaySpeed);
       CircuitPlayground.clearPixels();
 
-      if (buttonFlag) {
+      if (buttonFlag) {  //Sets up the break out of the while loop if button pressed
         buttonFlag = false;
         whileFlag = true;
         break;
       }
 
-      if (switchFlag) {
+      if (switchFlag) {  //Sets up the break out of the while loop if switch changed
         switchFlag = false;
 
-        if (lifeLineCount > 0) {
+        if (lifeLineCount > 0) {  //Slows down the circling LED
           lifeLineCount--;
           slowDown = true;
           saveSpeed = delaySpeed;
@@ -74,19 +74,19 @@ void loop() {
     }
   }
 
-  if (slowDown) {
+  if (slowDown) {  //Resets speed after using the switch
     slowDown = false;
     delaySpeed = saveSpeed;
   }
 
-  if (currentLED == ranLED) {
+  if (currentLED == ranLED) {  //Keeps track of the game score
     pointTotal++;
     correctFreq += 5;
     Serial.print("Points: ");
     Serial.println(pointTotal);
     CircuitPlayground.playTone(correctFreq, 100);
     delaySpeed *= 0.9;
-  } else {
+  } else {  //Ends the game when the player fails
     CircuitPlayground.speaker.say(spFAIL);
     Serial.println("GAME OVER");
     Serial.print("Final Score: ");
@@ -99,7 +99,7 @@ void loop() {
     Serial.println();
     Serial.println();
 
-    while (true) {
+    while (true) {  //Infinite loop indicating the end of the game
       for (int i = 0; i < 10; i++) {
         CircuitPlayground.setPixelColor(i, 0, 255, 0);
         delay(delaySpeed);
@@ -109,10 +109,10 @@ void loop() {
   }
 }
 
-void buttonISR() {
+void buttonISR() {  //Button interupt
   buttonFlag = true;
 }
 
-void switchISR() {
+void switchISR() {  //Switch interupt
   switchFlag = true;
 }
